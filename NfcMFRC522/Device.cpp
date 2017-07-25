@@ -327,7 +327,9 @@ NTSTATUS Device::OnPrepareHardware(WDFCMRESLIST resourcesRaw, WDFCMRESLIST resou
 	}
 
 	if ((flags & DEVICE_RESOURCES) != DEVICE_RESOURCES)
+	{
 		return STATUS_UNSUCCESSFUL;
+	}
 
 	return STATUS_SUCCESS;
 }
@@ -534,7 +536,7 @@ NTSTATUS Device::ReadRegister(PCDRegister reg, BYTE* buffer, ULONG length, BYTE 
 	NTSTATUS status = STATUS_SUCCESS;
 
 	BYTE mask = 0;
-	for (BYTE i = align; i <= 7; i++)
+	for (BYTE i = align; i < 8; i++)
 	{
 		mask |= (1 << i);
 	}
